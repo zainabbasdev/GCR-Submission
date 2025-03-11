@@ -33,12 +33,13 @@ exports.createAmanat = async (req, res) => {
   }
 };
 
+// Update an existing khata record
 exports.updateAmanat = async (req, res) => {
   try {
     const { personName, transactionType, amount, description } = req.body;
     let khata = await KhataBook.findOne({ personName });
 
-    // If the person does not have an existing khata, create a new one
+    // If the person does not have an existing khata, return an error
     if (!khata) {
       res.status(404).json({ message: "Amanat not found!" });
     }
@@ -61,12 +62,10 @@ exports.updateAmanat = async (req, res) => {
         amount: 0,
       });
       await khata.save();
-      return res
-        .status(200)
-        .json({
-          message: "Amanat Balance is Zero. Nil Transaction Added",
-          khata,
-        });
+      return res.status(200).json({
+        message: "Amanat Balance is Zero. Nil Transaction Added",
+        khata,
+      });
     }
     // Save the khata record
     await khata.save();

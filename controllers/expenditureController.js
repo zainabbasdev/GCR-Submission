@@ -103,7 +103,7 @@ exports.getExpenditureByYear = async (req, res) => {
   }
 };
 
-// get total expenditure by month
+// Get total expenditure by month
 exports.getTotalExpenditureByMonth = async (req, res) => {
   try {
     const { year, month } = req.params;
